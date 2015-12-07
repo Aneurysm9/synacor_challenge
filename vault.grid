@@ -37,6 +37,7 @@ while ($rounds < 100000000) {
 		$distance = $score;
 		$winner = $value;
 	}
+	last if $distance == 12;
 }
 
 print Dumper $winner;
