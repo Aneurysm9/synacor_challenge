@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
 
-my $cache = {};
+my $cache = [];
 my ($a, $b, $c) = (4, 1, 0);
 
 while ($a != 6 && $c < 32768) {
 	$c++;
 	($a, $b) = (4, 1);
-	$cache = {};
+	$cache = [];
 	print 'Trying: ' . join(', ', ($a, $b, $c)) . "\n";
 	recurse();
 }
@@ -15,9 +15,9 @@ print join(', ', ($a, $b, $c)) . "\n";
 
 
 sub recurse {
-	my $key = join(', ', ($a, $b, $c));
-	if ($cache->{$key}) {
-		$a = $cache->{$key};
+	my $key = ($a * 32768) + $b;
+	if ($cache->[$key]) {
+		$a = $cache->[$key];
 		return;
 	}
 
@@ -38,5 +38,5 @@ sub recurse {
 	} else {
 		$a = ($b + 1) % 32768;
 	}
-	$cache->{$key} = $a;
+	$cache->[$key] = $a;
 }
